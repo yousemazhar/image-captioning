@@ -1,0 +1,32 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Virtual envs
+venv/
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Datasets / artifacts (never commit — too large)
+coco/
+features/
+models/
+*.npy
+*.keras
+*.h5
+*.pkl
+kaggle.json
+
+# Logs
+*.log
