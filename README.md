@@ -34,9 +34,9 @@ Training metrics at the best epoch: val caption loss ≈ 2.27, val caption acc �
 ## Pipeline overview
 
 1. **Download** MS COCO 2014 from Kaggle (`hariwh0/ms-coco-dataset`).
-2. **Caption preprocessing** — lowercase, strip punctuation, wrap with `<start>` / `<end>`, tokenize, pad to 34 tokens, vocab capped at 10,000 (full unique vocab is ~17K).
-3. **Image preprocessing** — resize 299×299, `inception_v3.preprocess_input`, run through frozen InceptionV3 to get 2048-d features, **cache to `.npy` once** so each epoch only touches disk.
-4. **Two-output Functional Keras model**:
+2. **Caption preprocessing:**  lowercase, strip punctuation, wrap with `<start>` / `<end>`, tokenize, pad to 34 tokens, vocab capped at 10,000 (full unique vocab is ~17K).
+3. **Image preprocessing:**  resize 299×299, `inception_v3.preprocess_input`, run through frozen InceptionV3 to get 2048-d features, **cache to `.npy` once** so each epoch only touches disk.
+4. **Two-output Functional Keras model:**
    - **Caption head:** `Embedding(10000, 256) → LSTM(512) → TimeDistributed(Dense(softmax))`
    - **Aux head:** `Dense(256, ReLU) → Dense(80, sigmoid)` for multi-label COCO categories
    - The image features project to 256-d, then to two `tanh` Dense layers used as the LSTM's initial `(h, c)` state.
@@ -49,7 +49,7 @@ Training metrics at the best epoch: val caption loss ≈ 2.27, val caption acc �
 
 ## Data splits
 
-The Kaggle mirror `hariwh0/ms-coco-dataset` contains only the 2014 **training** images — the 2014 val/test image folders are not in the archive (only `captions_val2014.json` is shipped, and its referenced images are absent). The notebook auto-detects this and falls back to carving val + test out of `train2014`:
+The Kaggle mirror `hariwh0/ms-coco-dataset` contains only the 2014 **training** images, the 2014 val/test image folders are not in the archive (only `captions_val2014.json` is shipped, and its referenced images are absent). The notebook auto-detects this and falls back to carving val + test out of `train2014`:
 
 | Split | Source | Count |
 |-------|--------|------:|
@@ -65,7 +65,7 @@ All splits are carved with a fixed random seed *before* the 50% subsample, so tr
 
 ```
 .
-├── AML_Project2_ImageCaptioning.ipynb   # the deliverable — runs end-to-end on Colab
+├── AML_Project2_ImageCaptioning.ipynb   # the deliverable -> runs end-to-end on Colab
 ├── README.md
 └── .gitignore
 ```
@@ -105,7 +105,7 @@ art = pickle.load(open('tokenizer.pkl', 'rb'))
 | `EMBED_DIM` | 256 | shared image / word embedding dim |
 | `LSTM_UNITS` | 512 | standard Show-and-Tell setting |
 | `BATCH_SIZE` | 64 | fits T4 VRAM at this model size |
-| `EPOCHS` | 10 | val loss still slowly improving at 10 — 15 would help |
+| `EPOCHS` | 10 | val loss still slowly improving at 10 - 15 would help |
 | `SUBSET_FRACTION` | 0.50 | spec minimum |
 | `loss_weights` | caption 1.0 / aux 0.2 | aux is supervision aid, not the main objective |
 | `optimizer` | Adam(1e-3) | with `ReduceLROnPlateau(factor=0.5, patience=1)` |
@@ -117,8 +117,8 @@ art = pickle.load(open('tokenizer.pkl', 'rb'))
 
 The assignment allows the use of *any* CNN/RNN, with the caveat that architectures *not* discussed in the course must be described carefully. We deliberately stayed within course-covered material:
 
-- **InceptionV3** — a standard ImageNet-pretrained CNN already discussed in lectures, used as a frozen 2048-d feature extractor.
-- **Single-layer LSTM** — the canonical RNN variant covered in class, used as the language decoder with image-conditioned `(h, c)` initial state.
+- **InceptionV3:** a standard ImageNet-pretrained CNN already discussed in lectures, used as a frozen 2048-d feature extractor.
+- **Single-layer LSTM:** the canonical RNN variant covered in class, used as the language decoder with image-conditioned `(h, c)` initial state.
 
 Because both are course-standard, the spec's "describe any non-course architecture" clause does not apply here. A clear architectural walk-through is included in the notebook for completeness.
 
@@ -142,4 +142,4 @@ Because both are course-standard, the spec's "describe any non-course architectu
 
 ## License
 
-Educational / coursework — not for commercial use. MS COCO data is governed by its own license.
+Educational / coursework, not for commercial use. MS COCO data is governed by its own license.
