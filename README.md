@@ -23,7 +23,7 @@ Evaluated on **1,000 held-out test images** carved from `train2014` before the 5
 
 | Metric  | Score  |
 |---------|--------|
-| BLEU-1  | ≈ 0.68 |
+| BLEU-1  | ≈ 0.67 |
 | BLEU-2  | ≈ 0.50 |
 | BLEU-3  | ≈ 0.35 |
 | BLEU-4  | ≈ 0.25 |
