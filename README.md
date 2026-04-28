@@ -1,19 +1,16 @@
 # Image Captioning on MS COCO (CNN-RNN)
 
-End-to-end image-captioning pipeline built for **Advanced Machine Learning, Spring 2026 (GIU)** — Project 2.
-A frozen **InceptionV3** encoder feeds a single-layer **LSTM** decoder, trained jointly with an **auxiliary multi-label classification head** over the 80 MS COCO object categories. The whole pipeline runs in a single Google Colab notebook on a free T4 GPU.
+End-to-end image-captioning pipeline. A frozen **InceptionV3** encoder feeds a single-layer **LSTM** decoder, trained jointly with an **auxiliary multi-label classification head** over the 80 MS COCO object categories. The whole pipeline runs in a single Google Colab notebook on a free T4 GPU.
 
-> Architecture is the classic *Show and Tell* (Vinyals et al., 2015) recipe — image feature → projected embedding → initial `(h, c)` of the LSTM → token-by-token softmax decoder.
+> Architecture is the classic *Show and Tell* (Vinyals et al., 2015): image feature → projected embedding → initial `(h, c)` of the LSTM → token-by-token softmax decoder.
 
 ---
 
-## Team
+## Team members
 
-| Name | ID |
-|------|----|
-| Yousef Magdy   | 13007105 |
-| Jana Raed      | 13002886 |
-| Kareem Elfeel  | 13001824 |
+Yousef Magdy  
+Jana Raed   
+Kareem Elfeel
 
 ---
 
